@@ -24,7 +24,7 @@ public class Item {
     private String description;
 
     @Column
-    private float daily_price;
+    private Float daily_price;
 
     @ManyToOne//(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_user")
@@ -61,11 +61,11 @@ public class Item {
         this.description = description;
     }
 
-    public float getDaily_price() {
+    public Float getDaily_price() {
         return daily_price;
     }
 
-    public void setDaily_price(float daily_price) {
+    public void setDaily_price(Float daily_price) {
         this.daily_price = daily_price;
     }
 
