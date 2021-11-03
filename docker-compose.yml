@@ -1,0 +1,28 @@
+services:
+  item_c:
+    image: item-catalogue
+    container_name: item_catalogue
+    restart: always
+    ports:
+      # [port, skozi katerega dostopam OD ZUNAJ v kontejner]:[port, do katerega dostopam do servisa znotraj kontejnerja]
+      - "8080:8080"
+    networks:
+      - climb-app-network
+    depends_on:
+      - postgresdb
+
+  postgresdb:
+    image: postgres:13
+    container_name: climb-db
+    restart: always
+    ports:
+      - "5432:5432"
+    networks:
+      - climb-app-network
+    environment:
+      - POSTGRES_USER=dbuser
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=climb-db
+
+networks:
+  climb-app-network:
