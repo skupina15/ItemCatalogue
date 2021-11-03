@@ -33,11 +33,11 @@ public class Event {
     private List<Registration> registrations;
 
     @ManyToOne//(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_user")
-    private User organiser;
+    @JoinColumn(name = "id_persone")
+    private Persone organiser;
 
     @Column
-    private List<String> tags;
+    private String tag;
 
     // Getters and setters
     public Integer getId_event() {
@@ -88,19 +88,19 @@ public class Event {
         this.registrations = registrations;
     }
 
-    public User getOrganiser() {
+    public Persone getOrganiser() {
         return organiser;
     }
 
-    public void setOrganiser(User organiser) {
+    public void setOrganiser(Persone organiser) {
         this.organiser = organiser;
     }
 
-    public List<String> getTags() {
-        return tags;
+    public String getTag() {
+        return tag;
     }
 
-    public void setTags(List<String> tags) {
-        this.tags = tags;
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 }

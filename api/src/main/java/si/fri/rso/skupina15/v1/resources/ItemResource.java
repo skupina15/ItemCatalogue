@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 
 
 @ApplicationScoped
-@Path("images")
+@Path("items")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class ItemResource {

@@ -18,13 +18,13 @@ public class Registration {
     private String registration_date;
 
     @ManyToOne//(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_user")
-    private User user;
+    @JoinColumn(name = "id_persone")
+    private Persone persone;
 
     //@JsonbTransient
     @ManyToOne//(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_event")
-    private Event e;
+    private Event event;
 
     // Getters and setters
 
@@ -44,19 +44,19 @@ public class Registration {
         this.registration_date = registration_date;
     }
 
-    public User getUser() {
-        return user;
+    public Persone getPersone() {
+        return persone;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setPersone(Persone porsone) {
+        this.persone = persone;
     }
 
     public Event getE() {
-        return e;
+        return event;
     }
 
     public void setE(Event e) {
-        this.e = e;
+        this.event = e;
     }
 }

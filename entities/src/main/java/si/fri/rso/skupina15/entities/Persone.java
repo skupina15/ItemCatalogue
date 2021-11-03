@@ -3,19 +3,19 @@ package si.fri.rso.skupina15.entities;
 import javax.persistence.*;
 import java.util.List;
 
-@Entity(name = "user")
-@Table(name = "user")
+@Entity(name = "persone")
+@Table(name = "persone")
 @NamedQueries(value =
         {
-                @NamedQuery(name = "si.fri.rso.skupina15.entities.User.getAll", query = "SELECT u FROM user u"),
+                @NamedQuery(name = "si.fri.rso.skupina15.entities.Persone.getAll", query = "SELECT u FROM persone u"),
         })
 
 
-public class User {
+public class Persone {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_user;
+    private Integer id_persone;
 
     @Column
     private String user_name;
@@ -24,23 +24,23 @@ public class User {
     private String email;
 
     //@JsonbTransient
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user",  cascade = CascadeType.REMOVE)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "organiser",  cascade = CascadeType.REMOVE)
     private List<Event> events;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user",  cascade = CascadeType.REMOVE)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "persone",  cascade = CascadeType.REMOVE)
     private List<Registration> registrations;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user",  cascade = CascadeType.REMOVE)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "persone",  cascade = CascadeType.REMOVE)
     private List<Rent> rentals;
 
     //Getters and setters
 
-    public Integer getId_user() {
-        return id_user;
+    public Integer getId_persone() {
+        return id_persone;
     }
 
-    public void setId_user(Integer id_user) {
-        this.id_user = id_user;
+    public void setId_persone(Integer id_persone) {
+        this.id_persone = id_persone;
     }
 
     public String getUser_name() {

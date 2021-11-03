@@ -1,5 +1,7 @@
 package si.fri.rso.skupina15.entities;
 
+import org.eclipse.persistence.annotations.BasicCollection;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -18,7 +20,7 @@ public class Item {
     private Integer id_item;
 
     @Column
-    private String name;
+    private String title;
 
     @Column
     private String description;
@@ -27,14 +29,14 @@ public class Item {
     private Float daily_price;
 
     @ManyToOne//(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_user")
-    private User owner;
+    @JoinColumn(name = "id_persone")
+    private Persone owner;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "item",  cascade = CascadeType.REMOVE)
     private List<Rent> rentals;
 
     @Column
-    private List<String> tags;
+    private String tag;
 
     // Getters and setters
     public Integer getId_item() {
@@ -45,12 +47,12 @@ public class Item {
         this.id_item = id_item;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDescription() {
@@ -69,11 +71,11 @@ public class Item {
         this.daily_price = daily_price;
     }
 
-    public User getOwner() {
+    public Persone getOwner() {
         return owner;
     }
 
-    public void setOwner(User owner) {
+    public void setOwner(Persone owner) {
         this.owner = owner;
     }
 
@@ -85,11 +87,11 @@ public class Item {
         this.rentals = rentals;
     }
 
-    public List<String> getTags() {
-        return tags;
+    public String getTag() {
+        return tag;
     }
 
-    public void setTags(List<String> tags) {
-        this.tags = tags;
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 }

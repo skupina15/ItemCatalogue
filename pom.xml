@@ -7,7 +7,7 @@
     <groupId>si.fri.rso.skupina15</groupId>
     <artifactId>ItemCatalogue</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
 
     <modules>
         <module>entities</module>
@@ -66,6 +66,28 @@
                 <artifactId>kumuluzee-health</artifactId>
                 <version>${kumuluz-health.version}</version>
             </dependency>
+            <dependency>
+                <groupId>si.fri.rso.skupina15</groupId>
+                <artifactId>entities</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>si.fri.rso.skupina15</groupId>
+                <artifactId>services</artifactId>
+                <version>${project.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

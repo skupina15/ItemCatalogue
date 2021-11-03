@@ -28,7 +28,7 @@ public class ItemBean {
         log.info("Deinitialization"+ ItemBean.class.getSimpleName());
     }
 
-    @PersistenceContext(unitName = "catalogue-jpa")
+    @PersistenceContext(unitName = "climb-jpa")
     private EntityManager em;
 
     public List<Item> findAllItems(QueryParameters query) {
@@ -48,7 +48,7 @@ public class ItemBean {
                 log.info("Can't create new item. ID is not defined.");
                 return null;
             }
-            if(item.getName() == null) {
+            if(item.getTitle() == null) {
                 log.info("Can't create new item. Name is not defined.");
                 return null;
             }
@@ -64,7 +64,7 @@ public class ItemBean {
                 log.info("Can't create new item. Owner is not defined.");
                 return null;
             }
-            if(item.getTags() == null) {
+            if(item.getTag() == null) {
                 log.info("Can't create new item. Tags are not defined.");
                 return null;
             }
