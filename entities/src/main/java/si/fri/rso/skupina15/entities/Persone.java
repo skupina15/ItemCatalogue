@@ -24,7 +24,7 @@ public class Persone {
     private String email;
 
     //@JsonbTransient
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "organiser",  cascade = CascadeType.REMOVE)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "host",  cascade = CascadeType.REMOVE)
     private List<Event> events;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "persone",  cascade = CascadeType.REMOVE)
