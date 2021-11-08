@@ -34,7 +34,7 @@ public class Event {
 
     @ManyToOne//(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_persone")
-    private Persone organiser;
+    private Persone host;
 
     @Column
     private String tag;
@@ -88,12 +88,12 @@ public class Event {
         this.registrations = registrations;
     }
 
-    public Persone getOrganiser() {
-        return organiser;
+    public Persone getHost() {
+        return host;
     }
 
-    public void setOrganiser(Persone organiser) {
-        this.organiser = organiser;
+    public void setHost(Persone host) {
+        this.host = host;
     }
 
     public String getTag() {
