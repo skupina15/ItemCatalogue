@@ -3,6 +3,7 @@ package si.fri.rso.skupina15.v1.resources;
 import com.kumuluz.ee.configuration.utils.ConfigurationUtil;
 import com.kumuluz.ee.rest.beans.QueryParameters;
 import si.fri.rso.skupina15.beans.CDI.ItemBean;
+import si.fri.rso.skupina15.beans.config.RestProperties;
 import si.fri.rso.skupina15.entities.Item;
 
 import javax.annotation.PostConstruct;
@@ -16,6 +17,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
@@ -24,6 +26,9 @@ import java.util.logging.Logger;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class ItemResource {
+
+    @Inject
+    private RestProperties restProperties;
     private Logger log = Logger.getLogger(ItemResource.class.getName());
 
     @Inject
@@ -33,10 +38,15 @@ public class ItemResource {
     protected UriInfo uriInfo;
 
     @GET
-    public Response getImageMetadata() {
+    public Response getItems() {
         QueryParameters query = QueryParameters.query(uriInfo.getRequestUri().getQuery()).build();
         Long count = itemBean.itemsCount(query);
         List<Item> items = itemBean.findAllItems(query);
+
+        // Testing configurations
+        log.info(restProperties.getPrint());
+        log.info(System.getenv().get("GREET"));
+
         return Response.ok(items).header("X-Total-Count", count).build();
     }
 

@@ -10,7 +10,8 @@ kumuluzee:
   datasources:
     - jndi-name: jdbc/Climb
       connection-url: jdbc:postgresql://climb-db:5432/climb-db
+      #connection-url: jdbc:postgresql://localhost:5432/climb-db
       username: dbuser
       password: postgres
 rest-properties:
-  maintenance-mode: false
+  print: hej

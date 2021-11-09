@@ -8,6 +8,8 @@ services:
       - "8080:8080"
     networks:
       - climb-app-network
+    environment:
+      - GREET=hello-from-docker
     depends_on:
       - postgresdb
 
