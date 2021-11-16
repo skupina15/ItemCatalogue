@@ -13,5 +13,11 @@
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5432/postgres</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="bukqntkr@fanny.db.elephantsql.com" uuid="a31636fa-b85d-4dfc-8504-057816106a3d">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://fanny.db.elephantsql.com:5432/bukqntkr</jdbc-url>
+    </data-source>
   </component>
 </project>

@@ -13,34 +13,35 @@ spec:
         app: item-catalogue
     spec:
       containers:
-        - image: item-catalogue
+        - image: jstrem/item-image:2021-11-10-22-57-05
           name: item-catalogue
           env:
             - name: KUMULUZEE_DATASOURCES0_CONNECTIONURL
-              value: jdbc:postgresql://lallah.db.elephantsql.com:5432/kryfltbl
+              value: jdbc:postgresql://fanny.db.elephantsql.com:5432/bukqntkr
             - name: KUMULUZEE_DATASOURCES0_USERNAME
-              value: kryfltbl
+              value: bukqntkr
             - name: KUMULUZEE_DATASOURCES0_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: pg-pass
-                  key: KUMULUZEE_DATASOURCES0_PASSWORD
+              value: E2SE5Ru_O6OGntAqsOJqi-7QClTANW6d
+              #valueFrom:
+              #  secretKeyRef:
+              #    name: pg-pass
+              #    key: KUMULUZEE_DATASOURCES0_PASSWORD
           ports:
             - containerPort: 8080
               name: server
               protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /health/live
-              port: server
-            initialDelaySeconds: 20
-            periodSeconds: 3
-          readinessProbe:
-            httpGet:
-              path: /health/ready
-              port: server
-            initialDelaySeconds: 20
-            periodSeconds: 3
+          #livenessProbe:
+#            httpGet:
+#              path: /health/live
+#              port: server
+#            initialDelaySeconds: 20 # kolk nj na začetk počaka (če bi blo premal bi kubernetes skos na novo zagajnou ke nebi delal)
+#            periodSeconds: 3 # perioda s katero kubernetes kliče to
+#          readinessProbe:
+#            httpGet:
+#              path: /health/ready
+#              port: server
+#            initialDelaySeconds: 20
+#            periodSeconds: 3
 
 ---
 
@@ -51,7 +52,7 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-    - port: 8080
+    - port: 3333
       protocol: TCP
       targetPort: server
   selector:
