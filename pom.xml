@@ -74,16 +74,11 @@
                 <artifactId>kumuluzee-rest-core</artifactId>
                 <version>${kumuluzee-rest.version}</version>
             </dependency>
-            <dependency>
-                <groupId>com.kumuluz.ee.health</groupId>
-                <artifactId>kumuluzee-health</artifactId>
-                <version>${kumuluz-health.version}</version>
-            </dependency>
-            <dependency>
+            <!--<dependency>
                 <groupId>com.kumuluz.ee.config</groupId>
                 <artifactId>kumuluzee-config-consul</artifactId>
                 <version>${kumuluzee-config.version}</version>
-            </dependency>
+            </dependency>-->
             <dependency>
                 <groupId>si.fri.rso.skupina15</groupId>
                 <artifactId>entities</artifactId>

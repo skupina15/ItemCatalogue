@@ -16,5 +16,15 @@ kumuluzee:
       connection-url: jdbc:postgresql://fanny.db.elephantsql.com:5432/bukqntkr
       username: bukqntkr
       password: E2SE5Ru_O6OGntAqsOJqi-7QClTANW6d
+  health:
+    checks:
+      data-source-health-check:
+        type: liveness
+        jndi-name: jdbc/Climb
+  metrics:
+    web-instrumentation:
+      - name: items-endpoint
+        url-pattern: /v1/items/*
 rest-properties:
   print: hej
+  get_broken: true

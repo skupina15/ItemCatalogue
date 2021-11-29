@@ -11,6 +11,17 @@ public class RestProperties {
     @ConfigValue(value = "print", watch = true)
     private String print;
 
+    @ConfigValue(value="broken", watch = true)
+    private boolean broken;
+
+    public boolean getBroken() {
+        return broken;
+    }
+
+    public void setBroken(boolean broken) {
+        this.broken = broken;
+    }
+
     public String getPrint() {
         return print;
     }
