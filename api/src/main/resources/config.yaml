@@ -22,9 +22,10 @@ kumuluzee:
         type: liveness
         jndi-name: jdbc/Climb
   metrics:
-    web-instrumentation:
-      - name: items-endpoint
-        url-pattern: /v1/items/*
+    servlet:
+      enabled: true
+      mapping: /metrics
+
 rest-properties:
   print: hej
   get_broken: true

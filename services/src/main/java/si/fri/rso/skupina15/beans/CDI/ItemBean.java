@@ -2,6 +2,8 @@ package si.fri.rso.skupina15.beans.CDI;
 
 import com.kumuluz.ee.rest.beans.QueryParameters;
 import com.kumuluz.ee.rest.utils.JPAUtils;
+import org.eclipse.microprofile.metrics.annotation.Counted;
+import org.eclipse.microprofile.metrics.annotation.Timed;
 import si.fri.rso.skupina15.entities.Item;
 
 import javax.annotation.PostConstruct;
@@ -31,6 +33,7 @@ public class ItemBean {
     @PersistenceContext(unitName = "climb-jpa")
     private EntityManager em;
 
+    @Timed
     public List<Item> findAllItems(QueryParameters query) {
         List<Item> items = JPAUtils.queryEntities(em, Item.class, query);
         return items;
@@ -73,6 +76,7 @@ public class ItemBean {
         return item;
     }
 
+    @Counted
     public Item findItem(int id_item){
         try {
             return em.find(Item.class, id_item);
