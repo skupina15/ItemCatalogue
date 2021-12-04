@@ -30,18 +30,18 @@ spec:
             - containerPort: 8080
               name: server
               protocol: TCP
-          #livenessProbe:
-#            httpGet:
-#              path: /health/live
-#              port: server
-#            initialDelaySeconds: 20 # kolk nj na začetk počaka (če bi blo premal bi kubernetes skos na novo zagajnou ke nebi delal)
-#            periodSeconds: 3 # perioda s katero kubernetes kliče to
-#          readinessProbe:
-#            httpGet:
-#              path: /health/ready
-#              port: server
-#            initialDelaySeconds: 20
-#            periodSeconds: 3
+          livenessProbe:
+            httpGet:
+              path: /health/live
+              port: server
+            initialDelaySeconds: 20 # kolk nj na začetk počaka (če bi blo premal bi kubernetes skos na novo zagajnou ke nebi delal)
+            periodSeconds: 3 # perioda s katero kubernetes kliče to
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: server
+            initialDelaySeconds: 20
+            periodSeconds: 3
 
 ---
 

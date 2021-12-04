@@ -4,8 +4,8 @@
 kubectl version\
 kubectl --help\
 kubectl get nodes\
-kubectl create -f item-catalog-deployment.yaml\ 
-kubectl apply -f item-catalog-deployment.yaml \
+kubectl create -f item-catalogue-deployment.yaml \ 
+kubectl apply -f item-catalogue-deployment.yaml \
 kubectl get services \
 kubectl get deployments\
 kubectl get pods\
