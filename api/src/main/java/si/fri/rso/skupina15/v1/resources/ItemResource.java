@@ -1,6 +1,7 @@
 package si.fri.rso.skupina15.v1.resources;
 
 import com.kumuluz.ee.configuration.utils.ConfigurationUtil;
+import com.kumuluz.ee.logs.cdi.Log;
 import com.kumuluz.ee.rest.beans.QueryParameters;
 import si.fri.rso.skupina15.beans.CDI.ItemBean;
 import si.fri.rso.skupina15.beans.config.RestProperties;
@@ -20,7 +21,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
+@Log
 @ApplicationScoped
 @Path("items")
 @Produces(MediaType.APPLICATION_JSON)
