@@ -1,8 +1,14 @@
 package si.fri.rso.skupina15.v1.resources;
 
 import com.kumuluz.ee.configuration.utils.ConfigurationUtil;
-import com.kumuluz.ee.logs.cdi.Log;
+//import com.kumuluz.ee.logs.cdi.Log;
 import com.kumuluz.ee.rest.beans.QueryParameters;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.headers.Header;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import si.fri.rso.skupina15.beans.CDI.ItemBean;
 import si.fri.rso.skupina15.beans.config.RestProperties;
 import si.fri.rso.skupina15.entities.Item;
@@ -17,11 +23,12 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@Log
+//@Log
 @ApplicationScoped
 @Path("items")
 @Produces(MediaType.APPLICATION_JSON)
@@ -38,6 +45,13 @@ public class ItemResource {
     @Context
     protected UriInfo uriInfo;
 
+    @Operation(description = "Returns a list of items.", summary = "List of items", tags = "item", responses = {
+            @ApiResponse(responseCode = "200",
+                    description = "List of items",
+                    content = @Content(
+                            array = @ArraySchema(schema = @Schema(implementation = Item.class))),
+                    headers = {@Header(name = "X-Total-Count", schema = @Schema(type = "integer"))}
+            )})
     @GET
     public Response getItems() {
         QueryParameters query = QueryParameters.query(uriInfo.getRequestUri().getQuery()).build();
@@ -51,6 +65,36 @@ public class ItemResource {
         return Response.ok(items).header("X-Total-Count", count).build();
     }
 
+    @Operation(description = "Returns a list of not borrowed items.", summary = "List of not borrowed items", tags = "item", responses = {
+            @ApiResponse(responseCode = "200",
+                    description = "List of not borrowed items items",
+                    content = @Content(
+                            array = @ArraySchema(schema = @Schema(implementation = Item.class))),
+                    headers = {@Header(name = "X-Total-Count", schema = @Schema(type = "integer"))}
+            )})
+    @GET
+    @Path("/available")
+    public Response getAvailableItems() {
+        QueryParameters query = QueryParameters.query(uriInfo.getRequestUri().getQuery()).build();
+        List<Item> items = itemBean.findAllItems(query);
+
+        List<Item> available = new ArrayList<>();
+
+        for (Item item : items){
+            if(item.getRentals().size() == 0){
+                available.add(item);
+            }
+        }
+
+        return Response.ok(available).header("X-Total-Count", available.size()).build();
+    }
+
+    @Operation(description = "Returns selected item.", summary = "Selected item", tags = "item", responses = {
+            @ApiResponse(responseCode = "200",
+                    description = "Selected item",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Item.class))
+            )})
     @GET
     @Path("{id}")
     public Response returnItems(@PathParam("id") Integer id){
@@ -63,6 +107,12 @@ public class ItemResource {
         }
     }
 
+    @Operation(description = "Add item.", summary = "New item", tags = "item", responses = {
+            @ApiResponse(responseCode = "200",
+                    description = "New item",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Item.class))
+            )})
     @POST
     public Response addItem(Item i){
         Item item = itemBean.createItem(i);
@@ -73,6 +123,12 @@ public class ItemResource {
         return Response.status(Response.Status.CREATED).entity(item).build();
     }
 
+    @Operation(description = "Change selected item.", summary = "Change item", tags = "item", responses = {
+            @ApiResponse(responseCode = "200",
+                    description = "Changed item",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Item.class))
+            )})
     @PUT
     @Path("{id}")
     public Response UpdateItem(@PathParam("id") Integer id, Item i){
@@ -84,6 +140,12 @@ public class ItemResource {
         return Response.status(Response.Status.CREATED).entity(item).build();
     }
 
+    @Operation(description = "Delete choosen item.", summary = "Deleted item", tags = "item", responses = {
+            @ApiResponse(responseCode = "200",
+                    description = "Deleted item",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Integer.class))
+            )})
     @DELETE
     @Path("{id}")
     public Response deleteItem(@PathParam("id") Integer id){

@@ -1,5 +1,6 @@
 package si.fri.rso.skupina15.entities;
 
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 
 @Entity(name = "rent")
@@ -21,7 +22,8 @@ public class Rent {
     @JoinColumn(name = "id_persone")
     private Persone persone;
 
-    //@JsonbTransient
+    // jsonbtrainsent pomeni da se bo rent pretvoril v json ko ga bo rabil item
+    @JsonbTransient
     @ManyToOne//(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_item")
     private Item item;

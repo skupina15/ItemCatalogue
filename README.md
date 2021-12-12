@@ -19,3 +19,9 @@ consul is commented in main and api pom (uncomment if you want to run)
 /v1/items -> list of all items
 /demo/break -> sets configurations so that custom health check imulates failure
 /health/live -> Custom health check and data source health check
+
+#OPENAPI
+http://localhost:8080/api-specs/ui
+
+#Filter query
+http://localhost:8080/v1/items?filter=tag:EQ:zimsko

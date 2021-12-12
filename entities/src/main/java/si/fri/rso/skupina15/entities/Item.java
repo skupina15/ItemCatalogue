@@ -2,6 +2,7 @@ package si.fri.rso.skupina15.entities;
 
 import org.eclipse.persistence.annotations.BasicCollection;
 
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import java.util.List;
 
@@ -32,6 +33,7 @@ public class Item {
     @JoinColumn(name = "id_persone")
     private Persone owner;
 
+    @JsonbTransient
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "item",  cascade = CascadeType.REMOVE)
     private List<Rent> rentals;
 
