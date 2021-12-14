@@ -25,3 +25,13 @@ http://localhost:8080/api-specs/ui
 
 #Filter query
 http://localhost:8080/v1/items?filter=tag:EQ:zimsko
+
+#Ingres
+Ingres IP: 20.81.77.21 \
+Paths:
+* /items
+* /rent \
+Commands:
+* helm install ingress-nginx ingress-nginx/ingress-nginx --create-namespace --namespace climb => create namespace (must be inside helm folder)
+* kubectl apply -f ingres.yaml --namespace climb => apply ingress configuration
+* kubectl --namespace climb get services -o wide => list services in namespace
