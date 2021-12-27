@@ -16,6 +16,7 @@ kumuluzee:
       connection-url: jdbc:postgresql://fanny.db.elephantsql.com:5432/bukqntkr
       username: bukqntkr
       password: E2SE5Ru_O6OGntAqsOJqi-7QClTANW6d
+      max-pool-size: 1
   health:
     checks:
       data-source-health-check:
@@ -25,6 +26,9 @@ kumuluzee:
     servlet:
       enabled: true
       mapping: /metrics
+  config:
+    consul:
+      agent: http://20.120.67.65/consul
   logs:
     config-file: '<?xml version="1.0" encoding="UTF-8"?>
                            <Configuration name="comments">
