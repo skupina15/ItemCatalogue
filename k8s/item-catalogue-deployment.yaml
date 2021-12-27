@@ -13,7 +13,7 @@ spec:
         app: item-catalogue
     spec:
       containers:
-        - image: jstrem/item-image:2021-12-28-01-08-40
+        - image: jstrem/item-image:2021-12-28-01-21-01
           name: item-catalogue
           env:
             - name: KUMULUZEE_DATASOURCES0_CONNECTIONURL
@@ -35,7 +35,7 @@ spec:
               path: /health/live
               port: server
             initialDelaySeconds: 20 # kolk nj na začetk počaka (če bi blo premal bi kubernetes skos na novo zagajnou ke nebi delal)
-            periodSeconds: 3 # perioda s katero kubernetes kliče to
+            periodSeconds: 3 # perioda s katero kubernetes kliče too
           readinessProbe:
             httpGet:
               path: /health/ready
