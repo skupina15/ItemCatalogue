@@ -51,4 +51,4 @@ kumuluzee:
 
 rest-properties:
   print: hej
-  get_broken: true
+  get_broken: false
