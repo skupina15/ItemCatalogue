@@ -2,15 +2,14 @@ package si.fri.rso.skupina15.beans.CDI;
 
 import com.kumuluz.ee.rest.beans.QueryParameters;
 import com.kumuluz.ee.rest.utils.JPAUtils;
-import org.eclipse.microprofile.metrics.annotation.Counted;
-import org.eclipse.microprofile.metrics.annotation.Gauge;
-import org.eclipse.microprofile.metrics.annotation.SimplyTimed;
-import org.eclipse.microprofile.metrics.annotation.Timed;
+import org.eclipse.microprofile.metrics.Timer;
+import org.eclipse.microprofile.metrics.annotation.*;
 import si.fri.rso.skupina15.entities.Item;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -41,12 +40,22 @@ public class ItemBean {
         return items;
     }
 
-    //@Gauge(unit = "length")
+    @Inject
+    @Metric(name = "counterTimed")
+    private Timer timer;
+
     public Long itemsCount(QueryParameters query) {
-        Long count = JPAUtils.queryEntitiesCount(em, Item.class, query);
-        return count;
+        final Timer.Context context = timer.time();
+        try {
+            Long count = JPAUtils.queryEntitiesCount(em, Item.class, query);
+            return count;
+        } finally {
+            context.stop();
+        }
+
     }
 
+    @Metered(name = "itemCreations")
     @Transactional
     public Item createItem(Item item){
         if(item != null) {
@@ -79,7 +88,6 @@ public class ItemBean {
         return item;
     }
 
-    @SimplyTimed(name = "findItemSimpleTimer")
     @Counted(name = "findItem")
     public Item findItem(int id_item){
         try {
