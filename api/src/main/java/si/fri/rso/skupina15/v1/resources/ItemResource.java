@@ -4,10 +4,12 @@ import com.kumuluz.ee.configuration.utils.ConfigurationUtil;
 import com.kumuluz.ee.logs.cdi.Log;
 import com.kumuluz.ee.rest.beans.QueryParameters;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.headers.Header;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import si.fri.rso.skupina15.beans.CDI.ItemBean;
 import si.fri.rso.skupina15.beans.config.RestProperties;
@@ -97,7 +99,8 @@ public class ItemResource {
             )})
     @GET
     @Path("{id}")
-    public Response returnItems(@PathParam("id") Integer id){
+    public Response returnItems(@Parameter(description = "The id that needs to be fetched", required = true)
+                                    @PathParam("id") Integer id){
         Item i = itemBean.findItem(id);
         if (i != null){
             return Response.ok(i).build();
@@ -114,7 +117,8 @@ public class ItemResource {
                             schema = @Schema(implementation = Item.class))
             )})
     @POST
-    public Response addItem(Item i){
+    public Response addItem(@RequestBody(description = "Created item object", required = true,
+            content = @Content(schema = @Schema(implementation = Item.class))) Item i){
         Item item = itemBean.createItem(i);
         if(item == null){
             log.info("Invalid API input.");
@@ -131,7 +135,9 @@ public class ItemResource {
             )})
     @PUT
     @Path("{id}")
-    public Response UpdateItem(@PathParam("id") Integer id, Item i){
+    public Response UpdateItem(@Parameter(description = "The id that needs to be updated", required = true)
+                                   @PathParam("id") Integer id, @RequestBody(description = "Created item object",
+            required = true, content = @Content(schema = @Schema(implementation = Item.class))) Item i){
         Item item = itemBean.updateItem(id, i);
         if(item == null){
             log.info("Item for update does not exist");
@@ -148,7 +154,8 @@ public class ItemResource {
             )})
     @DELETE
     @Path("{id}")
-    public Response deleteItem(@PathParam("id") Integer id){
+    public Response deleteItem(@Parameter(description = "The id that needs to be deleted", required = true)
+                                   @PathParam("id") Integer id){
         Integer item = itemBean.deleteItem(id);
         if(item == null){
             log.info("Item does not exist");
