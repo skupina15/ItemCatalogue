@@ -23,6 +23,12 @@ consul is commented in main and api pom (uncomment if you want to run)
 #OPENAPI
 http://localhost:8080/api-specs/ui
 
+raw:\
+http://20.120.67.65/notifications/api-specs/v1/openapi.json
+
+ui(for item catalogue):\
+http://20.120.66.133:3333/api-specs/ui/?url=http://http://20.120.66.133:3333//api-specs/v1/openapi.json
+
 #Filter query
 http://localhost:8080/v1/items?filter=tag:EQ:zimsko
 

@@ -2,8 +2,8 @@ package si.fri.rso.skupina15.v1.interceptor;
 
 import com.kumuluz.ee.common.config.EeConfig;
 import com.kumuluz.ee.common.runtime.EeRuntime;
-import com.kumuluz.ee.logs.cdi.Log;
-import org.apache.logging.log4j.CloseableThreadContext;
+//import com.kumuluz.ee.logs.cdi.Log;
+//import org.apache.logging.log4j.CloseableThreadContext;
 
 import javax.annotation.Priority;
 import javax.interceptor.AroundInvoke;
@@ -12,7 +12,7 @@ import javax.interceptor.InvocationContext;
 import java.util.HashMap;
 import java.util.UUID;
 
-@Log
+/*@Log
 @Interceptor
 @Priority(Interceptor.Priority.PLATFORM_BEFORE)
 public class LogContextInterceptor {
@@ -33,4 +33,4 @@ public class LogContextInterceptor {
             return result;
         }
     }
-}
+}*/

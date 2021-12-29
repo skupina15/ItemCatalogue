@@ -3,6 +3,8 @@ package si.fri.rso.skupina15.beans.CDI;
 import com.kumuluz.ee.rest.beans.QueryParameters;
 import com.kumuluz.ee.rest.utils.JPAUtils;
 import org.eclipse.microprofile.metrics.annotation.Counted;
+import org.eclipse.microprofile.metrics.annotation.Gauge;
+import org.eclipse.microprofile.metrics.annotation.SimplyTimed;
 import org.eclipse.microprofile.metrics.annotation.Timed;
 import si.fri.rso.skupina15.entities.Item;
 
@@ -33,12 +35,13 @@ public class ItemBean {
     @PersistenceContext(unitName = "climb-jpa")
     private EntityManager em;
 
-    @Timed
+    @Timed(name = "findAllItems")
     public List<Item> findAllItems(QueryParameters query) {
         List<Item> items = JPAUtils.queryEntities(em, Item.class, query);
         return items;
     }
 
+    //@Gauge(unit = "length")
     public Long itemsCount(QueryParameters query) {
         Long count = JPAUtils.queryEntitiesCount(em, Item.class, query);
         return count;
@@ -76,7 +79,8 @@ public class ItemBean {
         return item;
     }
 
-    @Counted
+    @SimplyTimed(name = "findItemSimpleTimer")
+    @Counted(name = "findItem")
     public Item findItem(int id_item){
         try {
             return em.find(Item.class, id_item);
