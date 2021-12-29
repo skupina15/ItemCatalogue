@@ -63,6 +63,10 @@
             <artifactId>kumuluzee-logs-common</artifactId>
             <version>1.4.2</version>
         </dependency>-->
+        <dependency>
+            <groupId>com.kumuluz.ee.cors</groupId>
+            <artifactId>kumuluzee-cors</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

@@ -14,6 +14,7 @@ kubectl delete pod image-catalog-deployment-6f59c5d96c-rjz46\
 
 #Consul
 consul is commented in main and api pom (uncomment if you want to run)
+http://20.84.36.103/ui/hashidc1/kv/environments/dev/services/event-registration-service/1.0.0/config/rest-properties/
 
 #API
 /v1/items -> list of all items
