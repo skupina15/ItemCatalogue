@@ -13,7 +13,7 @@ spec:
         app: item-catalogue
     spec:
       containers:
-        - image: jstrem/item-image:2021-12-29-00-07-29
+        - image: jstrem/item-image:2021-12-29-16-47-58
           name: item-catalogue
           env:
             - name: KUMULUZEE_DATASOURCES0_CONNECTIONURL

@@ -11,7 +11,7 @@ import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
 @OpenAPIDefinition(info = @Info(title = "API for items", version = "v1", contact = @Contact(email = "rso@fri.uni-lj.si"), license = @
-        License(name = "dev"), description = "API for items."), servers = @Server(url ="http://20.120.66.133:3333/v1"))
+        License(name = "dev"), description = "API for items."), servers = @Server(url ="http://20.120.67.65:8080/items/v1"))
 @ApplicationPath("v1")
 public class ItemCatalogueApplication extends Application {
 }
