@@ -59,10 +59,6 @@ public class ItemBean {
     @Transactional
     public Item createItem(Item item){
         if(item != null) {
-            if(item.getId_item() == null) {
-                log.info("Can't create new item. ID is not defined.");
-                return null;
-            }
             if(item.getTitle() == null) {
                 log.info("Can't create new item. Name is not defined.");
                 return null;
