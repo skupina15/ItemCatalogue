@@ -2,6 +2,8 @@ package si.fri.rso.skupina15.beans.CDI;
 
 import com.kumuluz.ee.rest.beans.QueryParameters;
 import com.kumuluz.ee.rest.utils.JPAUtils;
+import org.eclipse.microprofile.metrics.Histogram;
+import org.eclipse.microprofile.metrics.SimpleTimer;
 import org.eclipse.microprofile.metrics.Timer;
 import org.eclipse.microprofile.metrics.annotation.*;
 import si.fri.rso.skupina15.entities.Item;
@@ -41,17 +43,13 @@ public class ItemBean {
     }
 
     @Inject
-    @Metric(name = "counterTimed")
-    private Timer timer;
+    @Metric(name = "conutHistogram")
+    Histogram histogram;
 
     public Long itemsCount(QueryParameters query) {
-        final Timer.Context context = timer.time();
-        try {
-            Long count = JPAUtils.queryEntitiesCount(em, Item.class, query);
-            return count;
-        } finally {
-            context.stop();
-        }
+        Long count = JPAUtils.queryEntitiesCount(em, Item.class, query);
+        histogram.update(count);
+        return count;
 
     }
 
