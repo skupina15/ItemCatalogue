@@ -12,8 +12,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import si.fri.rso.skupina15.beans.CDI.ItemBean;
+import si.fri.rso.skupina15.beans.CDI.RentBean;
 import si.fri.rso.skupina15.beans.config.RestProperties;
 import si.fri.rso.skupina15.entities.Item;
+import si.fri.rso.skupina15.entities.Rent;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
@@ -43,6 +45,9 @@ public class ItemResource {
 
     @Inject
     private ItemBean itemBean;
+
+    @Inject
+    private RentBean rentBean;
 
     @Context
     protected UriInfo uriInfo;
@@ -80,10 +85,21 @@ public class ItemResource {
         QueryParameters query = QueryParameters.query(uriInfo.getRequestUri().getQuery()).build();
         List<Item> items = itemBean.findAllItems(query);
 
+        List<Rent>  rents = rentBean.findAllRent(QueryParameters.query("").build());
+
         List<Item> available = new ArrayList<>();
 
         for (Item item : items){
-            if(item.getRentals().size() == 0){
+            int id_item = item.getId_item();
+            boolean found = false;
+            for(Rent rent : rents){
+                if(id_item == rent.getItem().getId_item()){
+                    found = true;
+                    break;
+
+                }
+            }
+            if(!found){
                 available.add(item);
             }
         }
