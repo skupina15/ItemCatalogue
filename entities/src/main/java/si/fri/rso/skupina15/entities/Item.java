@@ -33,6 +33,7 @@ public class Item {
     @JoinColumn(name = "id_persone")
     private Persone owner;
 
+    //mogoče zakomentirat
     @JsonbTransient
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "item",  cascade = CascadeType.REMOVE)
     private List<Rent> rentals;

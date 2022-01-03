@@ -1,5 +1,6 @@
 package si.fri.rso.skupina15.entities;
 
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import java.util.List;
 
@@ -23,17 +24,32 @@ public class Persone {
     @Column
     private String email;
 
-    //@JsonbTransient
+    @JsonbTransient
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "host",  cascade = CascadeType.REMOVE)
     private List<Event> events;
 
+    @JsonbTransient
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "owner",  cascade = CascadeType.REMOVE)
+    private List<Item> items;
+
+    @JsonbTransient
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "persone",  cascade = CascadeType.REMOVE)
     private List<Registration> registrations;
 
+    @JsonbTransient
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "persone",  cascade = CascadeType.REMOVE)
     private List<Rent> rentals;
 
     //Getters and setters
+
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
+    }
 
     public Integer getId_persone() {
         return id_persone;
